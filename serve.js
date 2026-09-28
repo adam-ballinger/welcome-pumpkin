@@ -71,7 +71,7 @@ ${body}
 const form = (k) => page(`<p class="l dim" style="--i:0"># a few questions to see if we can build something for you</p>
 <form method="post" action="/?key=${k.key}" oninput="const t=event.target;t.style.height='auto';t.style.height=t.scrollHeight+1+'px'" onkeydown="if(event.key==='Enter'&&(event.ctrlKey||event.metaKey))this.requestSubmit()">
 ${questions.map((q, i) => `<label class="l" style="--i:${i + 1}"><span class="dim">[${i + 1}/${questions.length}]</span> <span class="m">?</span> ${q}
-<span class="f"><span class="c">›</span><textarea name="q${i}" rows="1" maxlength="2000"${i ? '' : ' required'}></textarea></span></label>`).join('\n')}
+<span class="f"><span class="c">›</span><textarea name="q${i}" rows="1" maxlength="2000"${i ? '' : ' required'}>${i ? '' : esc(k.label)}</textarea></span></label>`).join('\n')}
 <div class="l" style="--i:${questions.length + 1}"><button>send ⏎</button> <span class="dim">&nbsp;ctrl+enter</span></div></form>`, k);
 
 const thanks = (k) => page(`<p class="l" style="--i:0"><span class="y">✓</span> saved</p>
