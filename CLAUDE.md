@@ -13,3 +13,4 @@
 - npm link
 - zero dependencies except `mongodb`
 - Claude runs pumpkin as PUMPKIN_USER=Claude
+- Claude reads issues with pumpkin issue show <id>
