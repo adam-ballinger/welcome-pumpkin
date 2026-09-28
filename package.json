@@ -1,0 +1,11 @@
+{
+  "name": "welcome-pumpkin",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "bin": {
+    "pumpkin": "pumpkin.js"
+  },
+  "dependencies": {
+    "mongodb": "7.6.0"
+  }
+}

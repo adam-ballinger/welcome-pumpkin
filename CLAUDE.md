@@ -12,3 +12,4 @@
 - commonjs
 - npm link
 - zero dependencies except `mongodb`
+- Claude runs pumpkin as PUMPKIN_USER=Claude
