@@ -5,6 +5,9 @@
   "bin": {
     "pumpkin": "pumpkin.js"
   },
+  "scripts": {
+    "start": "node pumpkin.js serve"
+  },
   "dependencies": {
     "mongodb": "7.6.0"
   }
