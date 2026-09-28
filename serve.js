@@ -55,14 +55,18 @@ footer p{margin:.2rem 0}
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
 
 const page = (body, k) => `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Resource Automation</title><style>${css}</style><main>
+<title>🟥🟨🟦 Resource Automation</title>
+<meta property="og:title" content="🟥🟨🟦 Resource Automation">
+<meta property="og:description" content="A few questions to see if we can build something for ${esc(k.label)}.">
+<meta property="og:site_name" content="plan.rxtm.net">
+<meta name="twitter:card" content="summary"><style>${css}</style><main>
 <div class="top"><pre id="logo" aria-hidden="true"></pre>
 <div><h1>Resource<br>Automation</h1><div class="dim">plan · v1</div></div></div>
 ${body}
 <footer>
 <p># created by <span class="w">adam-ballinger</span>
 <p># data encrypted in transit and at rest
-<p># responses only read by adam-ballinger and anthropic coding assistant, never sold
+<p># responses only read by adam-ballinger and claude code, never sold
 <p># contact adam-ballinger to have your response deleted
 <p># no cookies, no tracking
 <p># key ${k.key} generated for ${esc(k.label)} ${k.createdAt.toISOString().slice(0, 10)} ${k.once && k.usedAt ? 'consumed ' + k.usedAt.toISOString().slice(0, 10) : 'valid for: ' + (k.once ? 'one response' : 'unlimited responses')}
