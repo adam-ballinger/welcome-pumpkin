@@ -1,4 +1,8 @@
+const fs = require('fs');
 const http = require('http');
+const path = require('path');
+
+const ogImage = fs.readFileSync(path.join(__dirname, 'og-image.png'));
 
 const questions = [
   'Business name',
@@ -55,11 +59,14 @@ footer p{margin:.2rem 0}
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
 
 const page = (body, k) => `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>🟥🟨🟦 Resource Automation</title>
-<meta property="og:title" content="🟥🟨🟦 Resource Automation">
+<title>Resource Automation</title>
+<meta property="og:title" content="Resource Automation">
 <meta property="og:description" content="A few questions to see if we can build something for ${esc(k.label)}.">
 <meta property="og:site_name" content="plan.rxtm.net">
-<meta name="twitter:card" content="summary"><style>${css}</style><main>
+<meta property="og:image" content="https://plan.rxtm.net/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><style>${css}</style><main>
 <div class="top"><pre id="logo" aria-hidden="true"></pre>
 <div><h1>Resource<br>Automation</h1><div class="dim">plan · v1</div></div></div>
 ${body}
@@ -90,7 +97,9 @@ module.exports = function serve(db, me) {
 
   http.createServer(async (req, res) => {
     try {
-      const key = new URL(req.url, 'http://x').searchParams.get('key');
+      const url = new URL(req.url, 'http://x');
+      if (url.pathname === '/og-image.png') return res.writeHead(200, { 'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400' }).end(ogImage);
+      const key = url.searchParams.get('key');
       const k = key && await keys.findOne({ key, scopes: 'plan' });
       if (!k) return res.writeHead(404).end();
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
